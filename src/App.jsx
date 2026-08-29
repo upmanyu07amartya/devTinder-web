@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStrore";
+import Feed from "./components/Feed";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Body />}>
+            <Route path ="/" element={<Feed />} />
               {/* Login and Profile are child routes of Body component. 
             The Outlet component in Body will render the matched child route. */}
               <Route path="/login" element={<Login />} />
