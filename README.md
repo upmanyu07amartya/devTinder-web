@@ -12,7 +12,10 @@
  - Make login API call
  - use cors middleware in backend
  - whitelist the frontend url in cors in backend - to see the cookie in the browser
- -
+ - Install redux toolkit
+ - create appStore, wrap app inside that appStore provider
+ - create a user slice
+ - add user slice to the app store in reducer.
 
 
 
