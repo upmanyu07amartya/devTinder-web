@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("virat@gmail.com");
+  const [password, setPassword] = useState("Virat@123");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,7 +25,8 @@ const Login = () => {
       dispatch(addUser(res.data));
       navigate("/");
     } catch (err) {
-      console.error(err);
+      setError(err?.response?.data);
+      console.error(err.response);
     }
   };
 
@@ -32,7 +34,6 @@ const Login = () => {
     <div className="flex justify-center bg-base-400 m-10 p-4">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Login</legend>
-
         <label className="label">Email</label>
         <input
           type="email"
@@ -41,7 +42,6 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
         <label className="label">Password</label>
         <input
           type="password"
@@ -50,7 +50,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
+        <p className="text-red-500">{error}</p>
         <button className="btn btn-neutral mt-4" onClick={handleLogin}>
           Login
         </button>
