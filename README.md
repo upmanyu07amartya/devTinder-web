@@ -20,6 +20,7 @@
  - edit profile and edit password feature.
  - feed slice and basic feed user card
  - display toast message on success and error
+ - connections screen
 
 
 
