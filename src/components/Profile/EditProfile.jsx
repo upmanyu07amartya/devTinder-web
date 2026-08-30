@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
+import toast from "react-hot-toast";
 
 const EditProfile = ({ user, setIsEditing }) => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const EditProfile = ({ user, setIsEditing }) => {
   const [gender, setGender] = useState(user?.gender);
   const [skills, setSkills] = useState(user?.skills?.join(", "));
   const [description, setDescription] = useState(user?.description);
+  const [profileImage, setProfileImage] = useState(user?.profileImageUrl);
 
   const handleUpdateProfile = async () => {
     const skillsArray = skills
@@ -29,14 +31,17 @@ const EditProfile = ({ user, setIsEditing }) => {
           age,
           gender,
           description,
+          profileImageUrl: profileImage,
           skills: skillsArray,
         },
         { withCredentials: true },
       );
+      toast.success(res?.data?.message);
       dispatch(addUser(res?.data));
       setIsEditing(false);
     } catch (err) {
-      console.error(err);
+      toast.error(err?.response?.data);
+      console.error(err?.response?.data);
     }
   };
 
@@ -128,9 +133,19 @@ const EditProfile = ({ user, setIsEditing }) => {
           <p className="label">Separate skills with commas</p>
         </fieldset>
       </div>
+      <fieldset className="fieldset mt-6">
+        <legend className="fieldset-legend">Profile Image</legend>
+
+        <input
+          type="text"
+          value={profileImage}
+          className="input input-bordered w-full"
+          onChange={(e) => setProfileImage(e.target.value)}
+        />
+      </fieldset>
 
       {/* Description */}
-      <fieldset className="fieldset mt-6">
+      <fieldset className="fieldset">
         <legend className="fieldset-legend">About</legend>
 
         <textarea
