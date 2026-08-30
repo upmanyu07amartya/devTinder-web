@@ -16,6 +16,10 @@
  - create appStore, wrap app inside that appStore provider
  - create a user slice
  - add user slice to the app store in reducer.
+ - view profiles screen
+ - edit profile and edit password feature.
+ - feed slice and basic feed user card
+ - display toast message on success and error
 
 
 
