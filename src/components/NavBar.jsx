@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
+import { Users, UserRoundPlus } from "lucide-react";
 
 const NavBar = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
-      dispatch(removeUser())
-      navigate("/login")
+      dispatch(removeUser());
+      navigate("/login");
     } catch (err) {
       console.error(err);
     }
@@ -26,6 +27,22 @@ const NavBar = () => {
         </Link>
       </div>
       <div className="flex gap-2">
+        {/* Connections */}
+        <Link
+          to="/connections"
+          className="btn btn-ghost btn-circle"
+          title="Connections"
+        >
+          <Users size={22} />
+        </Link>
+        {/* Requests */}
+        <Link
+          to="/requests"
+          className="btn btn-ghost btn-circle"
+          title="Requests"
+        >
+          <UserRoundPlus size={22} />
+        </Link>
         <div className="dropdown dropdown-end mx-5">
           <div
             tabIndex={0}
@@ -48,11 +65,7 @@ const NavBar = () => {
             <li>
               <Link to="/profile" className="justify-between">
                 Profile
-                <span className="badge">New</span>
               </Link>
-            </li>
-            <li>
-              <a>Settings</a>
             </li>
             <li>
               <a onClick={handleLogout}>Logout</a>
