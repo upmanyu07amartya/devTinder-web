@@ -27,22 +27,27 @@ const NavBar = () => {
         </Link>
       </div>
       <div className="flex gap-2">
-        {/* Connections */}
-        <Link
-          to="/connections"
-          className="btn btn-ghost btn-circle"
-          title="Connections"
-        >
-          <Users size={22} />
-        </Link>
-        {/* Requests */}
-        <Link
-          to="/requests"
-          className="btn btn-ghost btn-circle"
-          title="Requests"
-        >
-          <UserRoundPlus size={22} />
-        </Link>
+        <div className="flex items-center gap-4">
+          {/* Connections */}
+          <Link
+            to="/connections"
+            className="btn btn-ghost flex flex-col h-auto gap-0 py-2"
+            title="Connections"
+          >
+            <Users size={22} />
+            <span className="text-xs">Connections</span>
+          </Link>
+
+          {/* Requests */}
+          <Link
+            to="/requests"
+            className="btn btn-ghost flex flex-col h-auto gap-0 py-2"
+            title="Requests"
+          >
+            <UserRoundPlus size={22} />
+            <span className="text-xs">Requests</span>
+          </Link>
+        </div>
         <div className="dropdown dropdown-end mx-5">
           <div
             tabIndex={0}
@@ -50,7 +55,7 @@ const NavBar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             {user && user.data && (
-              <div className="w-10 rounded-full">
+              <div className="w-10 rounded-full mt-4">
                 <img
                   alt="Tailwind CSS Navbar component"
                   src={user.data.profileImageUrl}

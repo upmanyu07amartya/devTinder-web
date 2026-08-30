@@ -7,14 +7,14 @@ import toast from "react-hot-toast";
 
 const EditProfile = ({ user, setIsEditing }) => {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState(user?.firstName);
-  const [lastName, setLastName] = useState(user?.lastName);
-  const [email, setEmail] = useState(user?.email);
-  const [age, setAge] = useState(user?.age);
-  const [gender, setGender] = useState(user?.gender);
-  const [skills, setSkills] = useState(user?.skills?.join(", "));
-  const [description, setDescription] = useState(user?.description);
-  const [profileImage, setProfileImage] = useState(user?.profileImageUrl);
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [skills, setSkills] = useState(user?.skills?.join(", ") || "");
+  const [description, setDescription] = useState(user.description || "");
+  const [profileImage, setProfileImage] = useState(user.profileImageUrl || "");
 
   const handleUpdateProfile = async () => {
     const skillsArray = skills
