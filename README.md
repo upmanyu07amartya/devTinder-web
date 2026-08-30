@@ -21,6 +21,10 @@
  - feed slice and basic feed user card
  - display toast message on success and error
  - connections screen
+ - Requests screen
+ - Get Requests
+ - Accept and Reject Requests.
+ 
 
 
 
