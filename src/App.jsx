@@ -1,14 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
+
 import Body from "./components/Body";
 import Login from "./components/Login";
 import Profile from "./components/Profile/Profile";
-import { Provider } from "react-redux";
-import appStore from "./utils/appStrore";
 import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import { Provider } from "react-redux";
+import appStore from "./utils/appStrore";
 
 function App() {
   return (
@@ -17,15 +20,51 @@ function App() {
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Body />}>
-              <Route path="/" element={<Feed />} />
-              {/* Login and Profile are child routes of Body component. 
-            The Outlet component in Body will render the matched child route. */}
+              {/* Protected Feed */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Feed />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Login - Public */}
               <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/connections" element={<Connections />} />
-              <Route path="/requests" element={<Requests />} />
+
+              {/* Protected Profile */}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Protected Connections */}
+              <Route
+                path="/connections"
+                element={
+                  <ProtectedRoute>
+                    <Connections />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Protected Requests */}
+              <Route
+                path="/requests"
+                element={
+                  <ProtectedRoute>
+                    <Requests />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
           </Routes>
+
           <Toaster />
         </BrowserRouter>
       </Provider>

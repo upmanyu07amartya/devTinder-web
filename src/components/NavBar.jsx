@@ -29,24 +29,28 @@ const NavBar = () => {
       <div className="flex gap-2">
         <div className="flex items-center gap-4">
           {/* Connections */}
-          <Link
-            to="/connections"
-            className="btn btn-ghost flex flex-col h-auto gap-0 py-2"
-            title="Connections"
-          >
-            <Users size={22} />
-            <span className="text-xs">Connections</span>
-          </Link>
+          {user && user.data && (
+            <Link
+              to="/connections"
+              className="btn btn-ghost flex flex-col h-auto gap-0 py-2"
+              title="Connections"
+            >
+              <Users size={22} />
+              <span className="text-xs">Connections</span>
+            </Link>
+          )}
 
           {/* Requests */}
-          <Link
-            to="/requests"
-            className="btn btn-ghost flex flex-col h-auto gap-0 py-2"
-            title="Requests"
-          >
-            <UserRoundPlus size={22} />
-            <span className="text-xs">Requests</span>
-          </Link>
+          {user && user.data && (
+            <Link
+              to="/requests"
+              className="btn btn-ghost flex flex-col h-auto gap-0 py-2"
+              title="Requests"
+            >
+              <UserRoundPlus size={22} />
+              <span className="text-xs">Requests</span>
+            </Link>
+          )}
         </div>
         <div className="dropdown dropdown-end mx-5">
           <div
