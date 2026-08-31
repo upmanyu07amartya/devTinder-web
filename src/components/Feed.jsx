@@ -23,6 +23,8 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+  if(!feed) return
+  if(feed?.data?.length ===0 ) return <h4>No new users found</h4>
   return (
     <div className="mt-2 flex justify-center mb-10">
       {/* {feed?.data?.map((user) => {

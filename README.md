@@ -21,9 +21,13 @@
  - feed slice and basic feed user card
  - display toast message on success and error
  - connections screen
+ - connections slice
  - Requests screen
  - Get Requests
+ - requestsSlice
  - Accept and Reject Requests.
+ - sendrequest and ignore profiles
+ - signup form
  
 
 
