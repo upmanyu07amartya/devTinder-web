@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Body from "./components/Body";
 import Login from "./components/Login";
 import Profile from "./components/Profile/Profile";
@@ -9,14 +10,37 @@ import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ProtectedRoute from "./components/ProtectedRoute";
-
-import { Provider } from "react-redux";
-import appStore from "./utils/appStrore";
+import { BASE_URL } from "./utils/constants";
+import { useDispatch } from "react-redux";
+import { addUser } from "./utils/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(BASE_URL + "/profile/view", {
+          withCredentials: true,
+        });
+
+        dispatch(addUser(res.data));
+      } catch (err) {
+        console.log("User not logged in");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
-      <Provider store={appStore}>
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Body />}>
@@ -67,7 +91,6 @@ function App() {
 
           <Toaster />
         </BrowserRouter>
-      </Provider>
     </>
   );
 }
